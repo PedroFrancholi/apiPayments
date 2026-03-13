@@ -3,6 +3,7 @@ package br.com.apiPayments.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class HistoricalModel {
 
     @Id
@@ -24,10 +26,6 @@ public class HistoricalModel {
 
     @Column(nullable = false)
     private String dsReversalHistorical;
-
-    @Pattern(regexp = "D|C", message = "Tipo deve ser D ou C")
-    @Column(nullable = false)
-    private String tpMovment;
 
     @Column(nullable = false)
     private LocalDateTime dtCreatedAt;

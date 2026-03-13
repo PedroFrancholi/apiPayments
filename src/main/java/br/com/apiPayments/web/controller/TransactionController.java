@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transaction")
-@Tag(name = "Transaction", description = "Endpoints to register and maintenance of transactions")
+@Tag(name = "Transaction", description = "Endpoints for recording and maintaining of transactions")
 public class TransactionController {
 
     @GetMapping
