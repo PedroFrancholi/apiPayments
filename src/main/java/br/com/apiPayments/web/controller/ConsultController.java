@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
-@RequestMapping("/account")
-@Tag(name = "Account", description = "Endpoints to register and maintenance of accounts")
-public class AccountController {
+@RestController
+@RequestMapping("/consult")
+@Tag(name = "Consult", description = "Endpoints for consult data.")
+public class ConsultController {
 }
