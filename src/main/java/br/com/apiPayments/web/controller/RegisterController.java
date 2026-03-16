@@ -1,7 +1,11 @@
 package br.com.apiPayments.web.controller;
 
 import br.com.apiPayments.facade.RegisterFacade;
+import br.com.apiPayments.web.dto.request.AccountRequestDto;
+import br.com.apiPayments.web.dto.request.ComponentRequestDto;
 import br.com.apiPayments.web.dto.request.HistoricalRequestDto;
+import br.com.apiPayments.web.dto.response.AccountResponseDto;
+import br.com.apiPayments.web.dto.response.ComponentResponseDto;
 import br.com.apiPayments.web.dto.response.HistoricalResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,5 +29,17 @@ public class RegisterController {
     @Operation(summary = "Create new historical", description = "Create new historical of account moving")
     public ResponseEntity<HistoricalResponseDto> createHistorical(@RequestBody HistoricalRequestDto bodyHistorical){
         return ResponseEntity.status(HttpStatus.CREATED).body(registerFacade.createHistorical(bodyHistorical));
+    }
+
+    @PostMapping("/component")
+    @Operation(summary = "Create new component", description = "Create new component to link with account")
+    public ResponseEntity<ComponentResponseDto> createComponent(@RequestBody ComponentRequestDto bodyComponent){
+        return ResponseEntity.status(HttpStatus.CREATED).body(registerFacade.createComponent(bodyComponent));
+    }
+
+    @PostMapping("/account")
+    @Operation(summary = "Create new component", description = "Create new account")
+    public ResponseEntity<AccountResponseDto> createAccount(@RequestBody AccountRequestDto bodyAccount){
+        return ResponseEntity.status(HttpStatus.CREATED).body(registerFacade.createAccount(bodyAccount));
     }
 }

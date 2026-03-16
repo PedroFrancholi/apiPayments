@@ -23,7 +23,7 @@ public class AccountModel {
     @GeneratedValue
     private UUID cdAccount;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
     private Integer nrAccount;
 
     @Column(nullable = false)
