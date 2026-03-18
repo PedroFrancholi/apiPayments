@@ -19,5 +19,7 @@ public class HistoricalRequestDto {
     @NotEmpty
     private String dsHistorical;
     @NotEmpty
+    private Boolean inAccount;
+    @NotEmpty
     private String dsReversalHistorical;
 }

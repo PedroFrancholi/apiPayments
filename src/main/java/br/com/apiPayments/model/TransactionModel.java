@@ -34,9 +34,8 @@ public class TransactionModel {
     @JoinColumn(name = "historical_cd", nullable = false)
     private HistoricalModel cdHistorical;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
-    private StatusModel idStatus;
+    @Column(nullable = false)
+    private String cdStatus;
 
     @Column(nullable = false)
     private Boolean inReversal;

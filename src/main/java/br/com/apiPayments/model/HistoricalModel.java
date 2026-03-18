@@ -28,5 +28,8 @@ public class HistoricalModel {
     private String dsReversalHistorical;
 
     @Column(nullable = false)
+    private Boolean inAccount;
+
+    @Column(nullable = false)
     private LocalDateTime dtCreatedAt;
 }

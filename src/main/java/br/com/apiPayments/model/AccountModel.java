@@ -36,6 +36,6 @@ public class AccountModel {
     private LocalDateTime dtCreatedAt;
 
     @OneToOne
-    @JoinColumn(name = "component_id", nullable = false, unique = true)
-    private ComponentModel cdComponent;
+    @JoinColumn(name = "component_id", nullable = false)
+    private ComponentModel component;
 }

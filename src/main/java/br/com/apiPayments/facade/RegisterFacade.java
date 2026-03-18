@@ -1,5 +1,6 @@
 package br.com.apiPayments.facade;
 
+import br.com.apiPayments.enuns.SizeDocumentComponentEnum;
 import br.com.apiPayments.enuns.TypePersonEnum;
 import br.com.apiPayments.exception.GenericException;
 import br.com.apiPayments.model.AccountModel;
@@ -42,6 +43,7 @@ public class RegisterFacade {
             HistoricalModel historical = HistoricalModel.builder()
                     .dsHistorical(bodyHistorical.getDsHistorical())
                     .dsReversalHistorical(bodyHistorical.getDsReversalHistorical())
+                    .inAccount(bodyHistorical.getInAccount())
                     .dtCreatedAt(LocalDateTime.now())
                     .build();
 
@@ -51,6 +53,7 @@ public class RegisterFacade {
                     .idHistorical(historical.getIdHistorical())
                     .dsHistorical(historical.getDsHistorical())
                     .dsReversalHistorical(historical.getDsReversalHistorical())
+                    .inAccount(historical.getInAccount())
                     .dtCreatedAt(historical.getDtCreatedAt())
                     .build();
 
@@ -69,13 +72,19 @@ public class RegisterFacade {
     public ComponentResponseDto createComponent(ComponentRequestDto bodyComponent) {
         try {
 
+            String documentFormated = bodyComponent.getCdDocument().replace(".","").replace("-","");
+
+            if(documentFormated.length() != SizeDocumentComponentEnum.LEGAL_PERSON.getValue() & documentFormated.length() != SizeDocumentComponentEnum.NATURAL_PERSON.getValue()){
+                throw new GenericException("Document code provided "+documentFormated+" invalid", HttpStatus.BAD_REQUEST);
+            }
+
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
             String passwordCripted = encoder.encode(bodyComponent.getDsPassword());
 
             ComponentModel componentModel = ComponentModel.builder()
                     .nmPerson(bodyComponent.getNmPerson())
-                    .cdDocument(bodyComponent.getCdDocument())
+                    .cdDocument(documentFormated)
                     .tpPerson(TypePersonEnum.validTypePerson(bodyComponent.getTpPerson()))
                     .dsEmail(bodyComponent.getDsEmail())
                     .dsPassword(passwordCripted)
@@ -85,12 +94,10 @@ public class RegisterFacade {
             componentRepository.save(componentModel);
 
             return ComponentResponseDto.builder()
-                    .cdComponent(componentModel.getCdComponent())
                     .nmPerson(componentModel.getNmPerson())
                     .cdDocument(componentModel.getCdDocument())
                     .tpPerson(componentModel.getTpPerson())
                     .dsEmail(componentModel.getDsEmail())
-                    .dsPassword(componentModel.getDsPassword())
                     .dtCreatedAt(componentModel.getDtCreatedAt())
                     .build();
         }catch (GenericException e){
@@ -116,12 +123,22 @@ public class RegisterFacade {
                     .cdAgency(bodyAccount.getCdAgency())
                     .vlAmount(BigDecimal.ZERO)
                     .dtCreatedAt(LocalDateTime.now())
-                    .cdComponent(componentByCdDocument)
+                    .component(componentByCdDocument)
                     .build();
 
             accountRepository.save(accountModel);
 
-            return null;
+            return AccountResponseDto.builder()
+                    .nrAccount(accountModel.getNrAccount())
+                    .cdAgency(accountModel.getCdAgency())
+                    .vlAmount(accountModel.getVlAmount())
+                    .dtCreatedAt(accountModel.getDtCreatedAt())
+                    .component(ComponentResponseDto.builder()
+                            .cdDocument(accountModel.getComponent().getCdDocument())
+                            .nmPerson(accountModel.getComponent().getNmPerson())
+                            .dsEmail(accountModel.getComponent().getDsEmail())
+                            .build())
+                    .build();
 
         }catch (GenericException e){
             LogUtil.error(this.getClass(), "Client error: " + e.getMessage(), e);

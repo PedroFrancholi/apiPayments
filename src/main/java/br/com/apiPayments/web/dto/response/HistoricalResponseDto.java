@@ -1,5 +1,6 @@
 package br.com.apiPayments.web.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,14 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HistoricalResponseDto {
-
-    @NotEmpty
     private Integer idHistorical;
-    @NotEmpty
     private String dsHistorical;
-    @NotEmpty
     private String dsReversalHistorical;
-    @NotEmpty
+    private Boolean inAccount;
     private LocalDateTime dtCreatedAt;
 }
