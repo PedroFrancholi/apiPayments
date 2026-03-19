@@ -25,7 +25,7 @@ public class TransactionModel {
 
     @ManyToOne
     @JoinColumn(name = "originAccount_cd", nullable = false)
-    private AccountModel cdOriginAccount;
+    private AccountModel nrOriginAccount;
 
     @Column(nullable = false)
     private BigDecimal vlTransaction;
@@ -45,7 +45,7 @@ public class TransactionModel {
 
     @ManyToOne
     @JoinColumn(name = "destinationAccount_cd", nullable = true)
-    private AccountModel cdDestinationAccount;
+    private AccountModel destination;
 
     @Column(nullable = true)
     private String dsDetail;
