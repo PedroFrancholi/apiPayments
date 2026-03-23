@@ -2,6 +2,7 @@ package br.com.apiPayments.facade;
 
 import br.com.apiPayments.enuns.StatusPaymentEnum;
 import br.com.apiPayments.exception.GenericException;
+import br.com.apiPayments.messaging.TransactionProducer;
 import br.com.apiPayments.model.AccountModel;
 import br.com.apiPayments.model.HistoricalModel;
 import br.com.apiPayments.model.TransactionModel;
@@ -34,6 +35,9 @@ public class TransactionFacade {
 
     @Autowired
     private TransactionRepository transactionRepository;
+
+    @Autowired
+    private TransactionProducer transactionProducer;
 
     @Transactional
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionBody){
@@ -96,6 +100,10 @@ public class TransactionFacade {
                     .build();
 
             transactionRepository.save(transactionModel);
+
+            if(transactionModel.getCdStatus().equals(StatusPaymentEnum.PENDING.getValue())){
+                transactionProducer.sendTransaction(transactionModel.getCdTransaction());
+            }
 
             AccountModel originAccountAfterModel = accountRepository.findByNrAccount(transactionBody.getNrOriginAccount()).get();
 
