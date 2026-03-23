@@ -1,9 +1,7 @@
 package br.com.apiPayments.web.controller;
 
 import br.com.apiPayments.facade.ConsultFacade;
-import br.com.apiPayments.web.dto.response.AccountResponseDto;
-import br.com.apiPayments.web.dto.response.ComponentResponseDto;
-import br.com.apiPayments.web.dto.response.HistoricalResponseDto;
+import br.com.apiPayments.web.dto.response.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +53,29 @@ public class ConsultController {
     @Operation(summary = "Consult all accounts.", description = "Consult all accounts that registered.")
     private ResponseEntity<List<AccountResponseDto>> consultAccounts() {
         return ResponseEntity.status(HttpStatus.OK).body(consultFacade.consultAccounts());
+    }
+
+    @GetMapping("/transaction")
+    @Operation(summary = "Consult all transaction.", description = "Consult all transaction that registered.")
+    private ResponseEntity<List<TransactionResponseDto>> consultTransactions() {
+        return ResponseEntity.status(HttpStatus.OK).body(consultFacade.consultTransactions());
+    }
+
+    @GetMapping("/transaction/originAccount")
+    @Operation(summary = "Consult all transaction of an origin account.", description = "Consult all transaction that registered by number origin account.")
+    private ResponseEntity<TransactionAccountResponseDto> consultTransactionByNrOriginAccount(@RequestParam Integer nrOriginAccount) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultFacade.consultTransactionByNrOriginAccount(nrOriginAccount));
+    }
+
+    @GetMapping("/transaction/account")
+    @Operation(summary = "Consult all transaction of an account.", description = "Consult all transaction that registered by number account.")
+    private ResponseEntity<TransactionAccountResponseDto> consultTransactionByNrAccount(@RequestParam Integer nrAccount) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultFacade.consultTransactionByNrAccount(nrAccount));
+    }
+
+    @GetMapping("/transaction/pending")
+    @Operation(summary = "Consult all transaction of an account.", description = "Consult all transaction that registered of .")
+    private ResponseEntity<List<TransactionResponseDto>> consultTransactionPending() {
+        return ResponseEntity.status(HttpStatus.OK).body(consultFacade.consultTransactionPending());
     }
 }

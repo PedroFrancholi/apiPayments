@@ -35,6 +35,9 @@ public class AccountModel {
     @Column(nullable = false)
     private LocalDateTime dtCreatedAt;
 
+    @Column(nullable = false)
+    private LocalDateTime dtLastUpdate;
+
     @OneToOne
     @JoinColumn(name = "component_id", nullable = false)
     private ComponentModel component;

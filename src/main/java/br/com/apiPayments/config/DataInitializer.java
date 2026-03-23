@@ -45,6 +45,12 @@ public class DataInitializer implements CommandLineRunner {
                             .dtCreatedAt(LocalDateTime.now())
                             .build(),
                     HistoricalModel.builder()
+                            .dsHistorical("Deposit")
+                            .dsReversalHistorical("Reversal Deposit")
+                            .inAccount(false)
+                            .dtCreatedAt(LocalDateTime.now())
+                            .build(),
+                    HistoricalModel.builder()
                             .dsHistorical("Pix")
                             .dsReversalHistorical("Reversal Pix")
                             .inAccount(true)
@@ -100,6 +106,7 @@ public class DataInitializer implements CommandLineRunner {
                             .vlAmount(BigDecimal.ZERO)
                             .component(component1)
                             .dtCreatedAt(LocalDateTime.now())
+                            .dtLastUpdate(LocalDateTime.now())
                             .build(),
                     AccountModel.builder()
                             .nrAccount(2)
@@ -107,6 +114,7 @@ public class DataInitializer implements CommandLineRunner {
                             .vlAmount(BigDecimal.ZERO)
                             .component(component2)
                             .dtCreatedAt(LocalDateTime.now())
+                            .dtLastUpdate(LocalDateTime.now())
                             .build()
             ));
         }

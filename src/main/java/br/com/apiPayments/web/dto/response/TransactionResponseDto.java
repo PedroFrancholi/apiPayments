@@ -15,13 +15,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountResponseDto {
+public class TransactionResponseDto {
 
-    private UUID cdAccount;
-    private Integer nrAccount;
-    private Integer cdAgency;
-    private BigDecimal vlAmount;
+    private UUID cdTransaction;
+    private AccountResponseDto originAccount;
+    private AccountResponseDto destinationAccount;
+    private BigDecimal vlTransaction;
+    private HistoricalResponseDto historical;
+    private String cdStatus;
+    private String dsDetail;
     private LocalDateTime dtCreatedAt;
-    private LocalDateTime dtLastUpdate;
-    private ComponentResponseDto component;
+    private LocalDateTime dtProcessedAt;
 }

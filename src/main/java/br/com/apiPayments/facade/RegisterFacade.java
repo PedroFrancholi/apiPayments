@@ -123,6 +123,7 @@ public class RegisterFacade {
                     .cdAgency(bodyAccount.getCdAgency())
                     .vlAmount(BigDecimal.ZERO)
                     .dtCreatedAt(LocalDateTime.now())
+                    .dtLastUpdate(LocalDateTime.now())
                     .component(componentByCdDocument)
                     .build();
 
