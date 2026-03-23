@@ -1,7 +1,6 @@
 package br.com.apiPayments.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,18 +24,17 @@ public class TransactionModel {
 
     @ManyToOne
     @JoinColumn(name = "originAccount_cd", nullable = false)
-    private AccountModel cdOriginAccount;
+    private AccountModel origin;
 
     @Column(nullable = false)
     private BigDecimal vlTransaction;
 
     @ManyToOne
     @JoinColumn(name = "historical_cd", nullable = false)
-    private HistoricalModel cdHistorical;
+    private HistoricalModel historical;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
-    private StatusModel idStatus;
+    @Column(nullable = false)
+    private String cdStatus;
 
     @Column(nullable = false)
     private Boolean inReversal;
@@ -44,13 +42,13 @@ public class TransactionModel {
     @Column(nullable = false)
     private LocalDateTime dtCreatedAt;
 
+    @Column(nullable = false)
+    private LocalDateTime dtProcessAt;
+
     @ManyToOne
     @JoinColumn(name = "destinationAccount_cd", nullable = true)
-    private AccountModel cdDestinationAccount;
+    private AccountModel destination;
 
     @Column(nullable = true)
     private String dsDetail;
-
-    @Column(nullable = true)
-    private LocalDateTime dtProcessAt;
 }

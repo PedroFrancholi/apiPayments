@@ -2,24 +2,25 @@ package br.com.apiPayments.web.dto.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class HistoricalRequestDto {
+public class ComponentRequestDto {
 
     @NotEmpty
-    private Integer idHistorical;
+    private String nmPerson;
     @NotEmpty
-    private String dsHistorical;
+    private String cdDocument;
     @NotEmpty
-    private Boolean inAccount;
+    private String tpPerson;
     @NotEmpty
-    private String dsReversalHistorical;
+    private String dsEmail;
+    @NotEmpty
+    private String dsPassword;
 }

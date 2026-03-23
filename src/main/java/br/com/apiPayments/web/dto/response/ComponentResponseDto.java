@@ -1,6 +1,7 @@
-package br.com.apiPayments.model;
+package br.com.apiPayments.web.dto.response;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,33 +10,18 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
-@Table(name = "sb_component")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class ComponentModel {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ComponentResponseDto {
 
-    @Id
-    @GeneratedValue
     private UUID cdComponent;
-
-    @Column(nullable = false)
     private String nmPerson;
-
-    @Column(nullable = false, unique = true)
     private String cdDocument;
-
-    @Column(nullable = false)
     private String tpPerson;
-
-    @Column(nullable = false, unique = true)
     private String dsEmail;
-
-    @Column(nullable = false)
     private String dsPassword;
-
-    @Column(nullable = false)
     private LocalDateTime dtCreatedAt;
 }

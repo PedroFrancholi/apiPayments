@@ -6,20 +6,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class HistoricalRequestDto {
+@Data
+public class TransactionRequestDto {
 
     @NotEmpty
-    private Integer idHistorical;
+    private Integer nrOriginAccount;
+
+    private Integer nrDestinationAccount;
+
     @NotEmpty
-    private String dsHistorical;
+    private BigDecimal vlTransaction;
+
     @NotEmpty
-    private Boolean inAccount;
-    @NotEmpty
-    private String dsReversalHistorical;
+    private Integer cdHistorical;
+
+    private String dsDetail;
 }
