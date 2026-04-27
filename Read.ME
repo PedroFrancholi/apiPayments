@@ -27,7 +27,7 @@ API REST para gerenciamento de pagamentos, desenvolvida com Spring Boot. Permite
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/apiPayments.git
+git clone https://github.com/PedroFrancholi/apiPayments.git
 cd apiPayments
 ```
 
